@@ -1,0 +1,17 @@
+- name: Copy DoD Root CA Certificates
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/pki/ca-trust/source/anchors/{{ item }}"
+    owner: root
+    group: root
+    mode: '0644'
+  loop:
+    - GROUPREPLACE_CAs.pem
+
+- name: Update CA Trust Store (RHEL/CentOS/Fedora)
+  command: update-ca-trust extract
+  when: ansible_os_family == "RedHat"
+
+- name: Update CA Trust Store (Debian/Ubuntu)
+  command: update-ca-certificates
+  when: ansible_os_family == "Debian"
