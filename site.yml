@@ -1,17 +1,12 @@
+---
 - hosts: all
   gather_facts: yes
   roles:
-    - name: Include RHEL7 role if the host is RHEL7
-      ansible.builtin.include_role:
-        name: rhel7STIG
-      when: ansible_facts['distribution'] == "RedHat" and ansible_facts['distribution_major_version'] == "7"
-
-    - name: Include RHEL8 role if the host is RHEL8
-      ansible.builtin.include_role:
-        name: rhel8STIG
-      when: ansible_facts['distribution'] == "RedHat" and ansible_facts['distribution_major_version'] == "8"
-
-    - name: Include RHEL9 role if the host is RHEL9
-      ansible.builtin.include_role:
-        name: rhel9STIG
-      when: ansible_facts['distribution'] == "RedHat" and ansible_facts['distribution_major_version'] == "9"
+#    - role: rhel7STIG
+#      when: ansible_facts['distribution'] == "RedHat" and ansible_facts['distribution_major_version'] == "7"
+#    - role: rhel8STIG
+#      when: ansible_facts['distribution'] == "RedHat" and ansible_facts['distribution_major_version'] == "8"
+#    - role: rhel9STIG
+#      when: ansible_facts['distribution'] == "RedHat" and ansible_facts['distribution_major_version'] == "9"
+    - role: DoD_Root_CAs
+    - role: logrotate
